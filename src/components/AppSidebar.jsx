@@ -18,7 +18,8 @@ import logo from "../assets/images/logo-white.png"
 import { RouteBlog, RouteCategorie, RouteIndex } from "@/helper/RouteName"
 import { Link, useNavigate } from "react-router-dom";
 import { AllCagetory } from "@/api/baseUrl";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "@/redux/category.slice";
 
 // Menu items.
 
@@ -37,20 +38,19 @@ const AppSidebar = () => {
 
     const [categorydata, setCategorydata] = useState([])
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const userdata = useSelector(state => state.user)
-
-
+    const { category } = useSelector(state => state.category)
 
     const fatchcategory = async () => {
         const cat = await AllCagetory()
         setCategorydata(cat?.data?.allCategory)
+        dispatch(setCategory(cat.data.allCategory))
     }
 
     useEffect(() => {
-        (async () => {
-            await fatchcategory()
-        })()
-
+        fatchcategory()
+        console.log(category)
     }, [])
 
     const items = allItems.filter(item => !item.role || item.role === userdata?.user?.role)
@@ -99,7 +99,7 @@ const AppSidebar = () => {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                             {
-                                categorydata?.map((cat) => (
+                                category?.map((cat) => (
                                     <SidebarMenuItem key={cat._id}>
                                         <SidebarMenuButton onClick={() => handleCategoryClick(cat.slug)} >
                                             <Circle />

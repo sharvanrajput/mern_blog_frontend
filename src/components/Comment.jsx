@@ -46,7 +46,7 @@ const Comment = ({ blogid }) => {
             const fetched = res?.data?.comments || [];
             dispatch(setComments(fetched));
         } catch (error) {
-            toast.error(error?.response?.data?.message || "Failed to fetch comments");
+            // toast.error(error?.response?.data?.message || "Failed to fetch comments");
         }
     };
 

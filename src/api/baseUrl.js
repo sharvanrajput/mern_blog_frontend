@@ -44,7 +44,7 @@ export const AddCagetory = async (data) => {
 };
 
 export const AllCagetory = async () => {
-    return await api.get("/catetory/all");
+    return await api.get("/category/all");
 };
 
 export const OneCagetory = async (data) => {

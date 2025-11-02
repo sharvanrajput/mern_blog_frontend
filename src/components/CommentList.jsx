@@ -27,10 +27,10 @@ const CommentList = ({ onDelete }) => {
               </Avatar>
               <div>
                 <p className="font-bold">{comment?.userid?.fullname}</p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-foreground">
                   {`${date} ${hours}:${minutes}`}
                 </p>
-                <p className="mt-1 text-sm text-gray-700">{comment.comment}</p>
+                <p className="mt-1 text-sm text-foreground">{comment.comment}</p>
               </div>
             </div>
 

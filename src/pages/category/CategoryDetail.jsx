@@ -24,7 +24,7 @@ const CategoryDetail = () => {
     const navigate = useNavigate()
     const [categorydata, setCategorydata] = useState([])
     const dispatch = useDispatch()
-    const {category} = useSelector(state => state.category)
+    const { category } = useSelector(state => state.category)
     const user = useSelector(state => state.user)
 
     useEffect(() => {
@@ -33,16 +33,6 @@ const CategoryDetail = () => {
         }
     })
 
-    const fatchcategory = async () => {
-        const cat = await AllCagetory()
-        setCategorydata(cat?.data?.allCategory)
-        dispatch(setCategory(cat.data.allCategory))
-    }
-
-    useMemo(() => {
-        fatchcategory()
-        console.log(category)
-    }, [])
 
     const handleDel = async (id) => {
         const res = await DeleteCagetory(id)
