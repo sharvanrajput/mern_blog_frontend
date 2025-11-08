@@ -37,13 +37,15 @@ const Header = () => {
     return (
         <div className='flex justify-between items-center h-16 fixed w-full z-20 px-5  border-b bg-sidebar py-2'>
             <div className=' flex  items-center'>
-                <img src={logo} className="w-[120px]" alt="" />
+                <Link to={"/"} className='cursor-pointer'>
+                    <img src={logo} className="w-[120px]" alt="" />
+                </Link>
                 <SidebarTrigger />
             </div>
             <div>
                 {/* <SearchBar /> */}
             </div>
-            <div  className='flex items-center gap-5'>
+            <div className='flex items-center gap-5'>
                 <ThemeToggle />
                 {
                     !user.isLoggedIn ?
