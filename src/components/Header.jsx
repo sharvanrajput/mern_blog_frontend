@@ -17,17 +17,24 @@ import { RouteProfile, RouteSignin } from '@/helper/RouteName'
 import usericon from "@/assets/images/user.png"
 import { FaPlus, FaUserAlt } from "react-icons/fa";
 import { ThemeToggle } from './ToggleTheme'
+import Cookies from 'js-cookie'
 
 const Header = () => {
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const token = Cookies.get("token");
+    
     const handleLogout = async () => {
         try {
+            
             const res = await Logout()
             dispatch(removeUser())
             toast.success(res.data.message)
             navigate(RouteSignin)
+            console.log(token);
+            console.log("inner token", token)
+            console.log("outer token", token)
 
         } catch (error) {
             toast.error(error.response?.data?.message)

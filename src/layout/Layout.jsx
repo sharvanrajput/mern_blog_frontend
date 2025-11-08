@@ -11,12 +11,14 @@ import { ThemeProvider } from '@/components/ThemeProvier'
 const Layout = () => {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const token = Cookies.get("token");
-        if (!token) {
-            navigate("/sign-in"); // redirect to login if token not found
-        }
-    }, [navigate]);
+    // useEffect(() => {
+
+    //     const token = Cookies.get("token");
+    //     if (!token) {
+    //         navigate("/sign-in"); // redirect to login if token not found
+    //     }
+    
+    // }, [navigate]);
     return (
         <div>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
