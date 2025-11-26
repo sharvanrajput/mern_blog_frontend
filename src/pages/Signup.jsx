@@ -14,7 +14,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import z from 'zod';
 
-// Zod schema
+
 const formSchema = z
   .object({
     fullname: z.string().min(3, "Name must be at least 3 characters long"),
@@ -31,9 +31,9 @@ const Signup = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const user = useSelector(state => state.user)
+  const { user, isLoggedIn } = useSelector(state => state.user)
   useEffect(() => {
-    if (user && user?.isLoggedIn) {
+    if (user && isLoggedIn) {
       navigate("/")
     } else {
       navigate(Routesignup)
@@ -58,7 +58,10 @@ const Signup = () => {
 
     try {
       const res = await Register(payload);
-      console.log("Register response:", res);
+      const token = res?.data?.token;
+      if (token) {
+        localStorage.setItem("token", token);
+      }
       toast.success(res?.data?.message)
       dispatch(setUser(res?.data?.user))
       navigate("/")

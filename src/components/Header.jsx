@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import logo from "../assets/images/logo-white.png"
 import { Button } from './ui/button'
 import { Link, useNavigate } from 'react-router-dom'
@@ -23,14 +23,14 @@ const Header = () => {
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const token = Cookies.get("token");
-    
+
     const handleLogout = async () => {
         try {
-            
+
             const res = await Logout()
             dispatch(removeUser())
             toast.success(res.data.message)
+            localStorage.removeItem("token");
             navigate(RouteSignin)
             console.log(token);
             console.log("inner token", token)
@@ -40,6 +40,14 @@ const Header = () => {
             toast.error(error.response?.data?.message)
         }
     }
+
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            navigate("/sign-in"); // redirect to login if token not found
+        }
+    }, []);
 
     return (
         <div className='flex justify-between items-center h-16 fixed w-full z-20 px-5  border-b bg-sidebar py-2'>

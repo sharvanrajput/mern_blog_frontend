@@ -26,15 +26,14 @@ const Signin = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const user = useSelector(state => state.user)
+    const { user, isLoggedIn } = useSelector(state => state.user)
 
     useEffect(() => {
-        if (user && user?.isLoggedIn) {
+        if (user && isLoggedIn) {
             navigate("/")
         } else {
             navigate(RouteSignin)
         }
-        console.log("user state", user?.isLoggedIn)
     }, [])
 
     const form = useForm({
@@ -50,7 +49,10 @@ const Signin = () => {
             const res = await Login(values)
             toast.success(res.data.message)
             dispatch(setUser(res?.data?.user))
-
+            const token = res?.data?.token;
+            if (token) {
+                localStorage.setItem("token", token);
+            }
             navigate("/")
             console.log("loigin res ", res)
 

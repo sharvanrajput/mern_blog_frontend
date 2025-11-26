@@ -25,6 +25,11 @@ const GoogleLogin = () => {
                 profile: user.photoURL,
             })
 
+            const token = signdata?.data?.token;
+            if (token) {
+                localStorage.setItem("token", token);
+            }
+
             toast.success(signdata.data.message)
             dispatch(setUser(signdata?.data?.user))
             console.log(signdata)
