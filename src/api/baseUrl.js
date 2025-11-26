@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 export const api = axios.create({
     // baseURL: "https://api-blogs-backend.onrender.com/api",
-    baseURL: "http://localhost:8000/api",
+    baseURL: "https://api-blogs-backend.onrender.com/api",
     withCredentials: true,
 });
 
